@@ -1,0 +1,7 @@
+dist
+.netlify
+.astro
+node_modules
+
+# Hand-maintained Markdown docs (Spanish, aligned tables/diagrams) — keep out of Prettier
+*.md
