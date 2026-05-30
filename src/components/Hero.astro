@@ -1,0 +1,42 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const contactEmail = 'hello.diceandcode@gmail.com';
+---
+
+<main
+  class="flex flex-1 flex-col items-center justify-center gap-6 p-6 text-center"
+>
+  <img
+    src="/images/logo/logo_dice_and_code_white.svg"
+    width="80"
+    height="80"
+    alt={t('brandName')}
+  />
+
+  <h1
+    class="text-[28px] font-semibold tracking-[-0.01em] text-brand sm:text-[34px]"
+  >
+    {t('brandName')}
+  </h1>
+
+  <p
+    class="max-w-[340px] text-[15px] leading-relaxed text-brand-secondary sm:text-[17px]"
+  >
+    {t('heroTagline')}
+  </p>
+
+  <a
+    href={`mailto:${contactEmail}`}
+    class="mt-1.5 inline-block rounded-[980px] bg-accent px-[26px] py-[11px] text-[15px] text-on-accent no-underline transition-colors duration-200 hover:bg-accent-hover"
+  >
+    {t('ctaContact')}
+  </a>
+</main>
+
+<footer class="p-6 text-center text-xs text-brand-muted">
+  {t('footerCopyright')}
+</footer>
