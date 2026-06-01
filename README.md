@@ -1,43 +1,59 @@
-# Astro Starter Kit: Minimal
+# Dice and Code — Brand site
+
+Static brand website for **Dice and Code**, an independent mobile app studio.
+It presents the brand and its published apps, links to social profiles, and
+hosts the per-app legal pages (privacy policy / terms) required by Google AdMob,
+the Play Store and the App Store.
+
+🔗 **Live:** https://diceandcode.netlify.app
+
+Available in **English** (default), **Spanish** and **Catalan** — served at `/`,
+`/es/` and `/ca/`.
+
+## Tech stack
+
+- [Astro 6](https://astro.build) — static site generation (no SSR)
+- [Tailwind CSS v4](https://tailwindcss.com) — CSS-first, configured via `@theme`
+- Self-hosted [Inter](https://rsms.me/inter/) font (no third-party requests)
+- `astro-icon`, `astro-seo`, `@astrojs/sitemap`
+- Deployed as a pure static site on [Netlify](https://www.netlify.com)
+
+## Getting started
+
+Requires **Node >= 22.12.0**.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev      # local dev server at http://localhost:4321
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Scripts
 
-## 🚀 Project Structure
+| Command                | Action                                          |
+| :--------------------- | :---------------------------------------------- |
+| `npm run dev`          | Start the dev server with hot reload            |
+| `npm run build`        | Build the static site to `dist/`                |
+| `npm run preview`      | Preview the production build locally            |
+| `npm run check`        | Type-check `.astro` / `.ts` files               |
+| `npm run format`       | Format the codebase with Prettier               |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── pages/        # routes — index.astro (en), es/, ca/
+├── layouts/      # MainLayout (page shell, SEO, fonts)
+├── components/   # UI components (Hero, …)
+├── i18n/         # translations (en/es/ca) + helpers
+└── styles/       # global.css — Tailwind v4 theme tokens
+public/           # fonts, images, favicons
+docs/             # internal docs (Spanish): BRIEF.md, DESIGN.md
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Project conventions and architecture notes for contributors live in
+[`CLAUDE.md`](./CLAUDE.md); the design system is documented in
+[`docs/DESIGN.md`](./docs/DESIGN.md).
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+---
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+© 2026 Dice and Code
