@@ -1,0 +1,111 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Fill these in when the store listings go live — null renders a disabled
+// "Coming soon" badge; a URL renders an active blue CTA.
+const appStoreUrl: string | null = null;
+const googlePlayUrl: string | null = null;
+
+const stores = [
+  { url: appStoreUrl, label: 'App Store', icon: 'simple-icons:appstore' },
+  { url: googlePlayUrl, label: 'Google Play', icon: 'simple-icons:googleplay' },
+];
+const allLive = stores.every((store) => store.url);
+
+const modes = [
+  { icon: 'mdi:gesture-tap', label: t('tapluckModePick') },
+  { icon: 'mdi:format-list-numbered', label: t('tapluckModeOrder') },
+  { icon: 'mdi:account-group', label: t('tapluckModeTeams') },
+  { icon: 'mdi:palette', label: t('tapluckModeThemes') },
+];
+
+const homeHref = getRelativeLocaleUrl(lang);
+---
+
+<main
+  class="flex flex-1 flex-col items-center justify-center gap-6 p-6 text-center"
+>
+  <img
+    src="/images/apps/tapluck/icon.webp"
+    width="96"
+    height="96"
+    alt={t('tapluckName')}
+    class="rounded-[22px]"
+  />
+
+  <h1
+    class="text-[28px] font-semibold tracking-[-0.01em] text-brand sm:text-[34px]"
+  >
+    {t('tapluckName')}
+  </h1>
+
+  <p class="text-[15px] text-brand sm:text-[17px]">
+    {t('tapluckTagline')}
+  </p>
+
+  <p class="max-w-[340px] text-[15px] leading-relaxed text-brand-secondary">
+    {t('tapluckSubline')}
+  </p>
+
+  <div class="flex flex-col items-center gap-3">
+    <div class="flex flex-col gap-2.5">
+      {
+        stores.map((store) =>
+          store.url ? (
+            <a
+              href={store.url}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex w-[200px] items-center justify-center gap-2 rounded-full bg-accent px-[26px] py-[11px] text-[15px] text-on-accent no-underline transition-colors duration-200 hover:bg-accent-hover"
+            >
+              <Icon name={store.icon} class="h-5 w-5" />
+              {store.label}
+            </a>
+          ) : (
+            <span
+              aria-disabled="true"
+              class="inline-flex w-[200px] cursor-default items-center justify-center gap-2 rounded-full border border-white/20 px-[26px] py-[11px] text-[15px] text-brand-secondary"
+            >
+              <Icon name={store.icon} class="h-5 w-5" />
+              {store.label}
+            </span>
+          ),
+        )
+      }
+    </div>
+    {
+      !allLive && (
+        <span class="text-xs uppercase tracking-wide text-brand-muted">
+          {t('tapluckComingSoon')}
+        </span>
+      )
+    }
+  </div>
+
+  <ul class="flex max-w-[320px] flex-wrap justify-center gap-2">
+    {
+      modes.map((mode) => (
+        <li class="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5 text-[13px] text-brand-secondary">
+          <Icon name={mode.icon} class="h-4 w-4" />
+          {mode.label}
+        </li>
+      ))
+    }
+  </ul>
+
+  <a
+    href={homeHref}
+    class="text-xs text-brand-muted no-underline transition-colors hover:text-brand-secondary"
+  >
+    {t('tapluckByStudio')}
+  </a>
+</main>
+
+<footer class="p-6 text-center text-xs text-brand-muted">
+  {t('footerCopyright')}
+</footer>
