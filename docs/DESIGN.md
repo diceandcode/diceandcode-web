@@ -202,11 +202,10 @@ El proyecto tiene dos layouts en `src/layouts/`:
 
 ### `MainLayout.astro`
 Layout general para todas las páginas de la web (home, apps, etc.). Incluye:
-- Carga de fuente Inter
-- CSS variables globales
-- Header con logo y navegación
-- Footer
-- Meta tags SEO via `astro-seo`
+- Preload de la fuente Inter y estilos globales (`global.css`)
+- Meta SEO via `astro-seo` y alternates `hreflang`
+- **Header** fino (`position: absolute`, arriba a la derecha) con el `LanguageSwitcher`; al ir absoluto no descentra el hero
+- El **footer** vive hoy dentro de `Hero.astro` (una sola línea de copyright), no en el layout
 
 ### `LegalLayout.astro`
 Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[slug]/terms`). Comparte el header y footer de `MainLayout` pero con cuerpo optimizado para lectura de texto legal:
@@ -231,7 +230,7 @@ Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[
 
 - **Contraste:** texto principal `#f5f5f7` sobre `#000` y CTA blanco sobre azul `#0071e3` cumplen AA.
 - **Fuentes:** auto-alojadas en `public/fonts/inter/` (woff2, sin terceros) con `font-display: swap` → sin FOIT.
-- **JavaScript mínimo:** Astro genera HTML estático por defecto. No añadir JS en cliente salvo necesidad real (el selector de idioma puede requerir algo mínimo).
+- **JavaScript mínimo:** Astro genera HTML estático por defecto. No añadir JS en cliente salvo necesidad real (el selector de idioma se resuelve con `<details>` nativo, **sin JS**).
 - **Imágenes con `width`/`height`** explícitos o usando el componente `<Image>` de Astro para evitar layout shift (CLS).
 - `alt` descriptivo obligatorio en el logo y en capturas de apps.
 - **Sitemap** generado automáticamente por `@astrojs/sitemap` en cada build.
@@ -243,7 +242,11 @@ Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[
 - **Idiomas soportados:** `en` (default), `es`, `ca`
 - Las cadenas de texto de la UI se gestionan en `src/i18n/` como archivos JSON por idioma.
 - No hay diferencias de diseño entre idiomas — misma paleta, mismos componentes.
-- El selector de idioma en el header es un elemento discreto, alineado con `text-brand-muted`, sin llamar la atención.
+- El selector de idioma (`LanguageSwitcher.astro`) es un elemento discreto en el header: **solo un icono de globo** (`text-brand-muted`, `hover:text-brand`) que despliega un menú con los nombres nativos (English / Español / Català). Detalles:
+  - Sin JS: usa `<details>`/`<summary>` nativo; el chevron rota con `group-open:rotate-180`.
+  - Panel translúcido estilo Apple: `bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl` (solo opacidades de blanco, no colores nuevos).
+  - El idioma actual va resaltado (`text-brand`) con un check; los demás en `text-brand-secondary`.
+  - Los enlaces se generan con `getRelativeLocaleUrl(code)` para que sigan siendo correctos cuando existan más páginas.
 
 ---
 
