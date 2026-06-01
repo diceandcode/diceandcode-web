@@ -1,0 +1,22 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import TapLuckHero from '../../../components/TapLuckHero.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const alternates = {
+  en: '/apps/tapluck',
+  es: '/es/apps/tapluck',
+  ca: '/ca/apps/tapluck',
+};
+---
+
+<MainLayout
+  title={t('tapluckName')}
+  description={t('tapluckMetaDescription')}
+  alternates={alternates}
+>
+  <TapLuckHero />
+</MainLayout>
