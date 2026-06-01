@@ -44,7 +44,7 @@ const homeHref = getRelativeLocaleUrl(lang);
     {t('tapluckName')}
   </h1>
 
-  <p class="text-[15px] text-brand sm:text-[17px]">
+  <p class="max-w-[340px] text-[15px] text-brand sm:text-[17px]">
     {t('tapluckTagline')}
   </p>
 
@@ -60,7 +60,7 @@ const homeHref = getRelativeLocaleUrl(lang);
             <a
               href={store.url}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               class="inline-flex w-[200px] items-center justify-center gap-2 rounded-full bg-accent px-[26px] py-[11px] text-[15px] text-on-accent no-underline transition-colors duration-200 hover:bg-accent-hover"
             >
               <Icon name={store.icon} class="h-5 w-5" />
@@ -68,7 +68,8 @@ const homeHref = getRelativeLocaleUrl(lang);
             </a>
           ) : (
             <span
-              aria-disabled="true"
+              role="img"
+              aria-label={`${store.label} — ${t('tapluckComingSoon')}`}
               class="inline-flex w-[200px] cursor-default items-center justify-center gap-2 rounded-full border border-white/20 px-[26px] py-[11px] text-[15px] text-brand-secondary"
             >
               <Icon name={store.icon} class="h-5 w-5" />
