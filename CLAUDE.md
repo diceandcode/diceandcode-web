@@ -74,7 +74,9 @@ Do not include Claude Code as co-author.
 - `npm run build` — static build to `dist/`
 - `npm run preview` — preview the build locally before deploying
 - `npm run check` — type-check `.astro`/`.ts` against `astro/tsconfigs/strict` (`@astrojs/check`)
-- `npm run format` / `npm run format:check` — Prettier write / verify (`prettier-plugin-astro`; config in `.prettierrc.json`, `singleQuote`)
+- `npm run format` / `npm run format:check` — Prettier write / verify (`prettier-plugin-astro`; config in `.prettierrc.json`, `singleQuote`, `endOfLine: lf`)
+
+Line endings are normalized to **LF** on every platform via `.gitattributes` (`* text=auto eol=lf`) — keeps Windows/macOS consistent and matches Prettier.
 - `npm run astro -- <cmd>` — run Astro CLI commands (e.g. `npm run astro -- add <integration>`)
 
 Prettier **ignores Markdown** (`*.md` in `.prettierignore`) — the Spanish docs in `docs/` have hand-aligned tables/diagrams; format them manually. No ESLint and no test runner are configured. Requires Node `>=22.12.0`.

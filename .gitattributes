@@ -1,0 +1,14 @@
+# Normalize line endings: store as LF in the repo and check out as LF on every
+# platform (Windows included). Keeps Prettier (LF) and macOS/Linux consistent.
+* text=auto eol=lf
+
+# Binary assets — never normalize or diff as text
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.otf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.ico   binary
