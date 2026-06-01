@@ -163,6 +163,8 @@ Sistema basado en **múltiplos de 6/8px**, con un valor de gutter dominante de *
 └───────────────────────────┘
 ```
 
+> **Nota (home actual):** desde que la home es un escaparate de apps, su cuerpo es `Home.astro` (hero compacto → `AppsGrid` → contacto fantasma → footer), no el hero de CTA único que ilustra el diagrama. El diagrama sigue siendo válido como patrón de pantalla centrada para las páginas de app (`/apps/[slug]`).
+
 ---
 
 ## 6. Componentes recurrentes
@@ -182,8 +184,11 @@ El componente más característico: **botón píldora de Apple**.
 </a>
 ```
 
-### Hero
-Bloque central único: logo → marca → tagline → CTA, en columna centrada con `flex flex-col items-center gap-6`. Patrón base para cualquier sección futura.
+### Home (escaparate de apps)
+El cuerpo de la home vive en `src/components/Home.astro` (antes `Hero.astro`). Composición en columna centrada: **hero compacto** (logo 40×40 → marca → tagline) → **`AppsGrid`** → **contacto fantasma** → footer. El contacto dejó de ser el botón azul: es un botón de borde (`border border-white/20 text-brand-secondary`, hover a `text-brand`) anclado abajo, porque el protagonismo es de las apps.
+
+### AppCard / AppsGrid
+`AppsGrid.astro` recorre `src/data/apps.ts` (lista tipada de apps publicadas: `slug`, icono, claves i18n de nombre y tagline) y pinta una `AppCard` por app bajo la etiqueta `appsSectionLabel`. `AppCard.astro` es una tarjeta-enlace (`bg-white/5 border border-white/10 rounded-2xl`, hover sutil) con icono + nombre + tagline + flecha, que lleva a `/apps/[slug]` localizado (`getRelativeLocaleUrl(lang, \`apps/${slug}\`)`). El grid usa `flex flex-wrap justify-center` para que una sola app quede centrada y varias formen filas. Añadir una app = añadir una entrada en `src/data/apps.ts` (+ su página).
 
 ### Footer
 Línea única de copyright, `text-xs text-brand-muted text-center p-6`. Discreto.

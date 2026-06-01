@@ -26,7 +26,7 @@ URL de producción: `https://diceandcode.netlify.app`
 - Detección automática por navegador, cambio manual disponible
 
 ## Páginas previstas
-- Home: hero, lista de apps, links sociales
+- Home: **construida como escaparate de apps** (hero compacto + grid de apps que enlazan a su página; contacto discreto). Pendiente: links a redes sociales.
 - /apps/[slug]: página individual de cada app
   - **/apps/tapluck — construida** (versión simple pre-capturas: icono, tagline, modos y badges de stores como placeholder; se rehará para incluir capturas cuando las exijan las tiendas)
 - /apps/[slug]/privacy: política de privacidad por app
