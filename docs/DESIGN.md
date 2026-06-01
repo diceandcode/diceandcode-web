@@ -250,6 +250,22 @@ Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[
 
 ---
 
+## 11. Página de app (`/apps/[slug]`)
+
+Patrón para la página de presentación de una app, estrenado con **TapLuck** (`/apps/tapluck`). Misma paleta y layout de una sola pantalla que el `Hero`: columna centrada `flex flex-1 flex-col items-center justify-center gap-6 p-6 text-center`, dentro de `MainLayout`. El componente vive en `src/components/<App>Hero.astro` y las rutas son páginas finas por idioma (`src/pages/apps/<slug>.astro` + `es/` + `ca/`).
+
+Orden vertical: icono de la app (`96×96`, `rounded-[22px]`, con `width`/`height`) → nombre (`h1`, tipografía de marca) → tagline (`text-brand`, línea gancho de alto contraste) → subline funcional (`text-brand-secondary`, `max-w-[340px]`) → badges de stores → modos como chips (`bg-white/5 text-brand-secondary rounded-full`) → enlace "Una app de Dice and Code" a la home → footer de copyright.
+
+**Badges de stores (patrón de descarga):** dos constantes `appStoreUrl`/`googlePlayUrl` en el frontmatter del componente.
+- `null` → píldora **deshabilitada** (`border border-white/20 text-brand-secondary`, sin `href`), marcada con `role="img"` y un `aria-label` que incluye el estado (p. ej. "App Store — Próximamente"); además, una microetiqueta "Próximamente" (`text-xs uppercase tracking-wide text-brand-muted`) bajo el par.
+- URL definida → píldora **activa** estilo CTA (`bg-accent hover:bg-accent-hover text-on-accent rounded-full`), con `target="_blank" rel="noopener noreferrer"`. Cuando ambas tienen URL, la etiqueta "Próximamente" desaparece.
+
+Iconos de store con `astro-icon`: `simple-icons:appstore` y `simple-icons:googleplay` (heredan el color del texto). Los `hreflang` se emiten pasando una prop `alternates` (mapa code→path) a `MainLayout`.
+
+**Sin capturas todavía:** esta primera versión se apoya en icono + copy + badges. Cuando existan capturas se ampliará la vista (probablemente con sección de scroll), fuera del patrón mínimo actual.
+
+---
+
 ## Resumen en una frase
 
 **Negro puro, Inter, azul Apple `#0071e3`, una pantalla centrada, botón píldora, cero ruido — premium y mobile-first.**

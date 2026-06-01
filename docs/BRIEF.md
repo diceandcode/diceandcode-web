@@ -28,6 +28,7 @@ URL de producción: `https://diceandcode.netlify.app`
 ## Páginas previstas
 - Home: hero, lista de apps, links sociales
 - /apps/[slug]: página individual de cada app
+  - **/apps/tapluck — construida** (versión simple pre-capturas: icono, tagline, modos y badges de stores como placeholder; se rehará para incluir capturas cuando las exijan las tiendas)
 - /apps/[slug]/privacy: política de privacidad por app
 - /apps/[slug]/terms: términos y condiciones por app
 
