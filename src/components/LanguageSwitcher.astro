@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, useTranslations, languages } from '../i18n/utils';
+
+const current = getLangFromUrl(Astro.url);
+const t = useTranslations(current);
+
+const locales = (Object.keys(languages) as Array<keyof typeof languages>).map(
+  (code) => ({
+    code,
+    label: languages[code],
+    href: getRelativeLocaleUrl(code),
+    isCurrent: code === current,
+  }),
+);
+---
+
+<details class="group relative">
+  <summary
+    aria-label={t('langSwitcherLabel')}
+    class="flex cursor-pointer list-none items-center gap-1 text-brand-muted transition-colors hover:text-brand [&::-webkit-details-marker]:hidden"
+  >
+    <Icon name="mdi:web" class="h-5 w-5" />
+    <Icon
+      name="mdi:chevron-down"
+      class="h-4 w-4 transition-transform duration-200 group-open:rotate-180"
+    />
+  </summary>
+
+  <ul
+    class="absolute right-0 mt-2 min-w-[160px] rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur-xl"
+  >
+    {
+      locales.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            hreflang={l.code}
+            aria-current={l.isCurrent ? 'true' : undefined}
+            class:list={[
+              'flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-[15px] no-underline transition-colors hover:bg-white/10',
+              l.isCurrent
+                ? 'text-brand'
+                : 'text-brand-secondary hover:text-brand',
+            ]}
+          >
+            {l.label}
+            {l.isCurrent && <Icon name="mdi:check" class="h-4 w-4" />}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>

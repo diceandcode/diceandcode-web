@@ -1,6 +1,7 @@
 ---
 import { SEO } from 'astro-seo';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -59,6 +60,9 @@ const localizedHome = { en: '/', es: '/es/', ca: '/ca/' };
     <SEO title={title} description={description} />
   </head>
   <body class="flex min-h-screen flex-col">
+    <header class="absolute inset-x-0 top-0 z-10 flex justify-end p-6">
+      <LanguageSwitcher />
+    </header>
     <slot />
   </body>
 </html>
