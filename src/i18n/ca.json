@@ -3,5 +3,15 @@
   "heroTagline": "Apps fetes amb codi i una mica de sort.",
   "ctaContact": "Parlem-ne",
   "footerCopyright": "© 2026 Dice and Code",
-  "langSwitcherLabel": "Canviar d'idioma"
+  "langSwitcherLabel": "Canviar d'idioma",
+  "tapluckName": "TapLuck",
+  "tapluckTagline": "Tots hi posen el dit. La sort tria.",
+  "tapluckSubline": "La manera més justa de triar algú, ordenar el grup o fer equips — al teu mòbil.",
+  "tapluckModePick": "Tria un",
+  "tapluckModeOrder": "Ordena",
+  "tapluckModeTeams": "Equips",
+  "tapluckModeThemes": "Temes",
+  "tapluckComingSoon": "Aviat",
+  "tapluckByStudio": "Una app de Dice and Code",
+  "tapluckMetaDescription": "TapLuck — el finger chooser per triar algú, ordenar o fer equips."
 }

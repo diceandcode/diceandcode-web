@@ -3,5 +3,15 @@
   "heroTagline": "Apps crafted with code & a little luck.",
   "ctaContact": "Get in touch",
   "footerCopyright": "© 2026 Dice and Code",
-  "langSwitcherLabel": "Change language"
+  "langSwitcherLabel": "Change language",
+  "tapluckName": "TapLuck",
+  "tapluckTagline": "Everyone taps. Luck picks.",
+  "tapluckSubline": "The fairest way to pick someone, set an order, or split into teams — right on your phone.",
+  "tapluckModePick": "Pick one",
+  "tapluckModeOrder": "Order",
+  "tapluckModeTeams": "Teams",
+  "tapluckModeThemes": "Themes",
+  "tapluckComingSoon": "Coming soon",
+  "tapluckByStudio": "An app by Dice and Code",
+  "tapluckMetaDescription": "TapLuck — the finger chooser to pick someone, set an order or split into teams."
 }

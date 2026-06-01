@@ -3,5 +3,15 @@
   "heroTagline": "Apps creadas con código y un poco de suerte.",
   "ctaContact": "Hablemos",
   "footerCopyright": "© 2026 Dice and Code",
-  "langSwitcherLabel": "Cambiar idioma"
+  "langSwitcherLabel": "Cambiar idioma",
+  "tapluckName": "TapLuck",
+  "tapluckTagline": "Todos ponen el dedo. La suerte elige.",
+  "tapluckSubline": "La forma más justa de elegir a alguien, ordenar el grupo o repartir equipos — en tu móvil.",
+  "tapluckModePick": "Elige uno",
+  "tapluckModeOrder": "Ordena",
+  "tapluckModeTeams": "Equipos",
+  "tapluckModeThemes": "Temas",
+  "tapluckComingSoon": "Próximamente",
+  "tapluckByStudio": "Una app de Dice and Code",
+  "tapluckMetaDescription": "TapLuck — el finger chooser para elegir a alguien, ordenar o hacer equipos."
 }
