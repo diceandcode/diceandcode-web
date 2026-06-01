@@ -1,0 +1,17 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { apps } from '../data/apps';
+import AppCard from './AppCard.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="flex w-full max-w-[640px] flex-col items-center gap-3">
+  <h2 class="text-xs uppercase tracking-[0.14em] text-brand-muted">
+    {t('appsSectionLabel')}
+  </h2>
+  <div class="flex w-full flex-wrap justify-center gap-3">
+    {apps.map((app) => <AppCard app={app} />)}
+  </div>
+</section>
