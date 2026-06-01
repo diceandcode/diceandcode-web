@@ -7,14 +7,17 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  alternates?: Record<string, string>;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title = t('brandName'), description = t('heroTagline') } = Astro.props;
-
-const localizedHome = { en: '/', es: '/es/', ca: '/ca/' };
+const {
+  title = t('brandName'),
+  description = t('heroTagline'),
+  alternates = { en: '/', es: '/es/', ca: '/ca/' },
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -43,7 +46,7 @@ const localizedHome = { en: '/', es: '/es/', ca: '/ca/' };
     />
 
     {
-      Object.entries(localizedHome).map(([code, path]) => (
+      Object.entries(alternates).map(([code, path]) => (
         <link
           rel="alternate"
           hreflang={code}
@@ -54,7 +57,7 @@ const localizedHome = { en: '/', es: '/es/', ca: '/ca/' };
     <link
       rel="alternate"
       hreflang="x-default"
-      href={new URL('/', Astro.site)}
+      href={new URL(alternates.en, Astro.site)}
     />
 
     <SEO title={title} description={description} />
