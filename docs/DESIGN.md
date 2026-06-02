@@ -118,6 +118,9 @@ Para acelerar el primer render, cuando exista `src/layouts/MainLayout.astro` con
   - `favicon-32.png` — fallback raster (mark blanco sobre tile negro para garantizar contraste).
   - `apple-touch-icon.png` (180×180) — iOS/PWA, mark blanco sobre tile negro.
   - A tamaño de pestaña (16–32px) el texto incrustado no se lee (solo la silueta del dado); es esperado. Se generan desde el logo con `sharp`. Sin `.ico`: SVG + PNG cubre los navegadores actuales.
+- **Iconos de app (separador estilo Apple):** los iconos de las apps (`AppCard`, página de app) se muestran con esquinas redondeadas **y una hairline gris** que replica el separador que iOS dibuja alrededor de los iconos. En iOS ese borde no se hornea en el arte: el sistema añade una línea fina translúcida (~1px) para que los iconos claros no se fundan con el fondo. Aquí, sobre fondo negro, se reproduce con `border border-white/10` (1px, misma opacidad que las tarjetas) sobre el `<img>`, manteniendo el radio existente.
+  - No usar `box-shadow: inset` / `ring-inset` en estos `<img>`: el contenido de la imagen tapa la sombra interior y no se ve. El `border` normal sí se renderiza y, con `box-sizing: border-box`, no altera el hueco.
+  - Radio de esquina ≈ Apple (~22,37 % del lado): `rounded-[11px]` a 44px, `rounded-[22px]` a 96px. Es un rectángulo redondeado normal; el squircle real (curvatura continua) quedaría pendiente como mejora con SVG/máscara.
 - **Iconografía general:** usar `astro-icon` con iconos lineales/sólidos monocromos. Los iconos deben heredar el color del texto y no introducir color propio.
 - **No** usar emojis ni ilustraciones decorativas en la UI.
 
