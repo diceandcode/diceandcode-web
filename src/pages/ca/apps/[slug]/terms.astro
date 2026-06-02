@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import LegalLayout from '../../../../layouts/LegalLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection(
+    'legal',
+    ({ data }) => data.type === 'terms' && data.lang === 'ca',
+  );
+  return entries.map((entry) => ({
+    params: { slug: entry.data.app },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { slug } = Astro.params;
+const { Content } = await render(entry);
+
+const alternates = {
+  en: `/apps/${slug}/terms`,
+  es: `/es/apps/${slug}/terms`,
+  ca: `/ca/apps/${slug}/terms`,
+};
+---
+
+<LegalLayout
+  title={entry.data.title}
+  lastUpdated={entry.data.lastUpdated}
+  appSlug={slug}
+  alternates={alternates}
+>
+  <Content />
+</LegalLayout>

@@ -29,8 +29,10 @@ URL de producción: `https://diceandcode.netlify.app`
 - Home: **construida como escaparate de apps** (hero compacto + grid de apps que enlazan a su página; contacto discreto). Pendiente: links a redes sociales.
 - /apps/[slug]: página individual de cada app
   - **/apps/tapluck — construida** (versión simple pre-capturas: icono, tagline, modos y badges de stores como placeholder; se rehará para incluir capturas cuando las exijan las tiendas)
-- /apps/[slug]/privacy: política de privacidad por app
-- /apps/[slug]/terms: términos y condiciones por app
+- /apps/[slug]/privacy: política de privacidad por app — **construida**
+- /apps/[slug]/terms: términos y condiciones por app — **construida**
+
+  Ambas se generan desde la colección de contenido `legal` (`getStaticPaths` filtrando por `type` y `lang`) y se renderizan con `LegalLayout`. Para TapLuck el texto legal está relleno con defaults de España (responsable/desarrollador **Rubén Codina Cid**, persona física que opera bajo el nombre comercial «Dice and Code»; jurisdicción España; edad de menores 14 según LOPDGDD; contacto `hello.diceandcode@gmail.com`; Terrassa, Barcelona) y **traducido a los tres idiomas** (en/es/ca): cada ruta localizada carga el markdown de su idioma. La UI del layout (encabezados, "última actualización", enlace de vuelta) también está traducida.
 
 ## Convenciones
 - Componentes en src/components/
@@ -38,6 +40,7 @@ URL de producción: `https://diceandcode.netlify.app`
 - Traducciones en src/i18n/ como JSON
 - Imágenes en public/images/
 - Páginas legales en Markdown con LegalLayout (fondo oscuro, tipografía legible, sin animaciones)
+- Textos legales en `src/content/legal/<slug>/` (colección `legal`, definida en `src/content.config.ts`): un archivo por documento e idioma con sufijo de idioma — `privacy-policy.{en,es,ca}.md` y `terms-of-service.{en,es,ca}.md` — cada uno con frontmatter `app`, `type` (`privacy`|`terms`), `lang` (`en`|`es`|`ca`), `title` y `lastUpdated`. Añadir legal a una app = crear su carpeta `<slug>/` con esos archivos (3 idiomas × 2 documentos); las rutas filtran por `type` + `lang` y el layout los recoge automáticamente.
 
 ## Apps publicadas
 - **Tapluck** — primera app publicada, sirve como referencia para el patrón de páginas `/apps/[slug]`

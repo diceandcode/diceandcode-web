@@ -1,0 +1,122 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import MainLayout from './MainLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  lastUpdated: Date;
+  appSlug: string;
+  alternates: Record<string, string>;
+}
+
+const { title, lastUpdated, appSlug, alternates } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const formattedDate = new Intl.DateTimeFormat(lang, {
+  dateStyle: 'long',
+}).format(lastUpdated);
+const appHref = getRelativeLocaleUrl(lang, `apps/${appSlug}`);
+---
+
+<MainLayout title={title} description={title} alternates={alternates}>
+  <main class="mx-auto w-full max-w-2xl flex-1 px-6 pt-24 pb-16">
+    <h1
+      class="text-[28px] font-semibold tracking-[-0.01em] text-brand sm:text-[34px]"
+    >
+      {title}
+    </h1>
+    <p class="mt-2 text-sm text-brand-muted">
+      {t('legalLastUpdated')}: {formattedDate}
+    </p>
+
+    <div class="legal-content mt-10">
+      <slot />
+    </div>
+
+    <a
+      href={appHref}
+      class="mt-12 inline-block text-sm text-brand-muted no-underline transition-colors hover:text-brand-secondary"
+    >
+      ← {t('legalBackToApp')}
+    </a>
+  </main>
+
+  <footer class="p-6 text-center text-xs text-brand-muted">
+    {t('footerCopyright')}
+  </footer>
+</MainLayout>
+
+<style>
+  .legal-content :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-brand);
+  }
+
+  .legal-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .legal-content :global(p) {
+    margin: 1rem 0;
+    line-height: 1.7;
+    color: var(--color-brand-secondary);
+  }
+
+  .legal-content :global(strong) {
+    font-weight: 600;
+    color: var(--color-brand);
+  }
+
+  .legal-content :global(a) {
+    color: var(--color-accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .legal-content :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  .legal-content :global(ul) {
+    margin: 1rem 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+    color: var(--color-brand-secondary);
+  }
+
+  .legal-content :global(li) {
+    margin: 0.375rem 0;
+    line-height: 1.7;
+  }
+
+  .legal-content :global(table) {
+    display: block;
+    width: 100%;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .legal-content :global(th),
+  .legal-content :global(td) {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+    color: var(--color-brand-secondary);
+  }
+
+  .legal-content :global(th) {
+    font-weight: 600;
+    color: var(--color-brand);
+    background: rgba(255, 255, 255, 0.05);
+  }
+</style>

@@ -15,8 +15,12 @@ The localized home (hero) is built and working. What exists in `src/`:
 - `src/components/LanguageSwitcher.astro` — globe-icon dropdown (native `<details>`, no JS) to switch en/es/ca; links via `getRelativeLocaleUrl`, marks the current locale with a check.
 - `src/i18n/{en,es,ca}.json` + `src/i18n/utils.ts` (`getLangFromUrl`, `useTranslations`, `languages` autonyms).
 - `src/styles/global.css` — Tailwind v4 `@theme` tokens (palette + Inter `--font-sans`) and base `body` styles.
+- `src/pages/{,es/,ca/}apps/tapluck.astro` + `src/components/TapLuckHero.astro` — the per-app page (`/apps/tapluck`), built.
+- `src/content.config.ts` + `src/content/legal/<slug>/{privacy-policy,terms-of-service}.{en,es,ca}.md` — `legal` Content Collection (glob loader). One file per document per language; each markdown has frontmatter (`app`, `type: privacy|terms`, `lang: en|es|ca`, `title`, `lastUpdated`). TapLuck's are filled with Spain defaults and translated to all three languages.
+- `src/layouts/LegalLayout.astro` — wraps `MainLayout`, adds a reading-optimized `max-w-2xl` container (title + localized "last updated" line + a `.legal-content` wrapper whose markdown is styled via scoped `:global()` rules using the palette tokens) and a copyright footer.
+- `src/pages/{,es/,ca/}apps/[slug]/{privacy,terms}.astro` — six thin pages (privacy/terms × en/es/ca). Each runs `getStaticPaths` over the `legal` collection filtered by `type` and its own `lang`, renders `<Content />` inside `LegalLayout`, and emits `hreflang` alternates. The TapLuck page footer links to its privacy/terms.
 
-**Still aspirational** (in `docs/`, not built yet): the `/apps/[slug]` routes, the per-app legal pages, and `LegalLayout`. Build these as features land; keep treating `docs/` as the target design.
+**Built and matching `docs/`**: the documented architecture (home, `/apps/[slug]`, per-app legal pages, `LegalLayout`) now exists. New apps follow the established patterns — add an app page plus `legal` collection entries. Keep treating `docs/` as the source of truth for design.
 
 ## Documentation
 All documentation lives in `docs/`. Always read before starting any task:

@@ -25,6 +25,8 @@ const modes = [
 ];
 
 const homeHref = getRelativeLocaleUrl(lang);
+const privacyHref = getRelativeLocaleUrl(lang, 'apps/tapluck/privacy');
+const termsHref = getRelativeLocaleUrl(lang, 'apps/tapluck/terms');
 ---
 
 <main
@@ -107,6 +109,22 @@ const homeHref = getRelativeLocaleUrl(lang);
   </a>
 </main>
 
-<footer class="p-6 text-center text-xs text-brand-muted">
-  {t('footerCopyright')}
+<footer
+  class="flex flex-col items-center gap-3 p-6 text-center text-xs text-brand-muted"
+>
+  <div class="flex items-center gap-4">
+    <a
+      href={privacyHref}
+      class="no-underline transition-colors hover:text-brand-secondary"
+    >
+      {t('legalPrivacy')}
+    </a>
+    <a
+      href={termsHref}
+      class="no-underline transition-colors hover:text-brand-secondary"
+    >
+      {t('legalTerms')}
+    </a>
+  </div>
+  <span>{t('footerCopyright')}</span>
 </footer>

@@ -213,11 +213,12 @@ Layout general para todas las páginas de la web (home, apps, etc.). Incluye:
 - El **footer** vive hoy dentro de `Hero.astro` (una sola línea de copyright), no en el layout
 
 ### `LegalLayout.astro`
-Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[slug]/terms`). Comparte el header y footer de `MainLayout` pero con cuerpo optimizado para lectura de texto legal:
-- Tipografía más generosa (`text-base leading-relaxed`)
-- Ancho de contenido contenido (`max-w-2xl mx-auto`)
-- Sin animaciones ni elementos llamativos
-- Misma paleta oscura — **no** fondo claro
+Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[slug]/terms`) — **construido**. Internamente **envuelve `MainLayout`** (reutiliza head, SEO, `hreflang` y el header con el `LanguageSwitcher`) y añade un cuerpo optimizado para lectura de texto legal:
+- Contenedor centrado y estrecho: `mx-auto w-full max-w-2xl px-6 pt-24 pb-16` (el `pt-24` deja sitio al header absoluto).
+- Encabezado de la página: `h1` con la tipografía de marca + línea de "última actualización" (`text-sm text-brand-muted`, fecha formateada con `Intl.DateTimeFormat` en el idioma actual, a partir de `lastUpdated` del frontmatter).
+- El Markdown renderizado (`<Content />`) va dentro de un envoltorio `.legal-content`. Como Tailwind no estila HTML generado por Markdown y no usamos el plugin `typography`, los estilos se aplican con CSS *scoped* + `:global()` (`.legal-content :global(h2)`, `p`, `a`, `ul`, `table`…), siempre con los tokens de la paleta (`var(--color-brand)`, `var(--color-brand-secondary)`, `var(--color-accent)`, bordes `white/10`). Las tablas hacen scroll horizontal en móvil.
+- Enlace de vuelta a la app (`← Volver a la app`) y footer de copyright, igual que el resto del sitio.
+- Misma paleta oscura — **no** fondo claro. Sin animaciones.
 
 ---
 
