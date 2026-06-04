@@ -10,7 +10,8 @@ Purpose: present the brand and its published apps, link to social media, and hos
 ## Current state (read this first)
 The localized home (hero) is built and working. What exists in `src/`:
 - `src/pages/index.astro` (en), `src/pages/es/index.astro`, `src/pages/ca/index.astro` — thin pages that render `MainLayout` + `Hero`. Lang is inferred from the URL.
-- `src/layouts/MainLayout.astro` — html/head shell (font preloads, `astro-seo`, `hreflang` alternates) plus a top `<header>` (absolute, top-right) holding the `LanguageSwitcher`. `<body class="flex min-h-screen flex-col">`.
+- `src/layouts/MainLayout.astro` — html/head shell (font preloads, `astro-seo`, `hreflang` alternates) plus a top `<header>` (absolute, `justify-between`) with `BrandLink` on the left (interior pages only, via the `showBrand` prop — default `true`; home pages pass `showBrand={false}`) and the `LanguageSwitcher` on the right. `<body class="flex min-h-screen flex-col">`.
+- `src/components/BrandLink.astro` — brand header link (logo + "Dice and Code") to the localized home; shown on interior pages, hidden on the home via `showBrand`.
 - `src/components/Hero.astro` — the whole hero (logo → brand → tagline → mailto CTA) + footer. Contact email lives here.
 - `src/components/LanguageSwitcher.astro` — globe-icon dropdown (native `<details>`, no JS) to switch en/es/ca; links via `getRelativeLocaleUrl`, marks the current locale with a check.
 - `src/i18n/{en,es,ca}.json` + `src/i18n/utils.ts` (`getLangFromUrl`, `useTranslations`, `languages` autonyms).

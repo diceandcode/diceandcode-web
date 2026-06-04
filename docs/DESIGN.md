@@ -193,6 +193,9 @@ El cuerpo de la home vive en `src/components/Home.astro` (antes `Hero.astro`). C
 ### AppCard / AppsGrid
 `AppsGrid.astro` recorre `src/data/apps.ts` (lista tipada de apps publicadas: `slug`, icono, claves i18n de nombre y tagline) y pinta una `AppCard` por app bajo la etiqueta `appsSectionLabel`. `AppCard.astro` es una tarjeta-enlace (`bg-white/5 border border-white/10 rounded-2xl`, hover sutil) con icono + nombre + tagline + flecha, que lleva a `/apps/[slug]` localizado (`getRelativeLocaleUrl(lang, \`apps/${slug}\`)`). El grid usa `flex flex-wrap justify-center` para que una sola app quede centrada y varias formen filas. Añadir una app = añadir una entrada en `src/data/apps.ts` (+ su página).
 
+### BrandLink
+Cabecera de marca para las **páginas interiores** (app, privacidad, términos): un enlace (`logo_dice_and_code_white.svg` a 28px + nombre "Dice and Code") alineado a la izquierda del header, que lleva a la home del idioma actual (`getRelativeLocaleUrl(lang)`). Texto en `text-brand-secondary` con hover a `text-brand` (`transition-colors duration-200`), coherente con el resto de la navegación. El logo es decorativo (`alt=""`) y el nombre accesible del enlace viene de `aria-label` con la clave i18n `navHome`. **No aparece en la home** (el logo del héroe ya cumple esa función): se controla con la prop `showBrand` de `MainLayout` (por defecto `true`; las home pasan `showBrand={false}`).
+
 ### Footer
 Línea única de copyright, `text-xs text-brand-muted text-center p-6`. Discreto.
 
@@ -212,7 +215,7 @@ El proyecto tiene dos layouts en `src/layouts/`:
 Layout general para todas las páginas de la web (home, apps, etc.). Incluye:
 - Preload de la fuente Inter y estilos globales (`global.css`)
 - Meta SEO via `astro-seo` y alternates `hreflang`
-- **Header** fino (`position: absolute`, arriba a la derecha) con el `LanguageSwitcher`; al ir absoluto no descentra el hero
+- **Header** fino (`position: absolute`, arriba, `flex justify-between`) con `BrandLink` a la izquierda (solo páginas interiores, vía la prop `showBrand` — por defecto `true`; las home pasan `showBrand={false}` y dejan ese hueco vacío) y el `LanguageSwitcher` a la derecha; al ir absoluto no descentra el hero
 - El **footer** vive hoy dentro de `Hero.astro` (una sola línea de copyright), no en el layout
 
 ### `LegalLayout.astro`

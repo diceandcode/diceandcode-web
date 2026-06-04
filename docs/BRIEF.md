@@ -37,6 +37,7 @@ URL de producción: `https://diceandcode.netlify.app`
 ## Convenciones
 - Componentes en src/components/
 - Layouts en src/layouts/ (MainLayout y LegalLayout)
+- `BrandLink` (logo + nombre) actúa como cabecera de marca en las páginas interiores y enlaza a la home del idioma actual. Se controla con la prop `showBrand` de `MainLayout` (por defecto `true`); las páginas home la desactivan con `showBrand={false}` porque el logo del héroe ya cumple esa función.
 - Traducciones en src/i18n/ como JSON
 - Imágenes en public/images/
 - Páginas legales en Markdown con LegalLayout (fondo oscuro, tipografía legible, sin animaciones)
