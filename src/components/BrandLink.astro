@@ -1,0 +1,23 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const homeHref = getRelativeLocaleUrl(lang);
+---
+
+<a
+  href={homeHref}
+  aria-label={t('navHome')}
+  class="flex items-center gap-2 text-brand-secondary no-underline transition-colors duration-200 hover:text-brand"
+>
+  <img
+    src="/images/logo/logo_dice_and_code_white.svg"
+    width="28"
+    height="28"
+    alt=""
+  />
+  <span class="text-sm font-semibold tracking-[-0.01em]">{t('brandName')}</span>
+</a>
