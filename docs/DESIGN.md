@@ -249,6 +249,20 @@ Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[
 
 ---
 
+## 10. SEO y metadatos
+
+Todo se centraliza en `MainLayout.astro` vía `astro-seo`. Cada página interior pasa sus props; la home usa los valores por defecto.
+
+- **Título:** plantilla en `MainLayout`. La home (sin prop `title`) genera `"Dice and Code — {brandDescriptor}"`; las páginas interiores generan `"{title} — Dice and Code"`. La marca visible en la UI no cambia, solo el `<title>`.
+- **`canonical`:** se construye desde `Astro.url.pathname` + `site` (siempre con barra final, igual que el sitemap).
+- **`hreflang`:** las rutas de la prop `alternates` deben llevar **barra final** para coincidir con la canónica y el sitemap (si no, Google las trata como URLs distintas).
+- **Open Graph / Twitter Card:** configurados en `MainLayout` (`og:*`, `twitter:card = summary_large_image`). `og:locale` se mapea por idioma (`en_US`, `es_ES`, `ca_ES`).
+- **Imágenes OG:** 1200×630 PNG en `public/og/` (`home.png`, `tapluck.png`). Se autogeneran con `node scripts/generate-og.mjs` (fondo de la paleta + logo/icono + texto, vía `sharp`). El script no forma parte de `npm run build`; los PNG se commitean como assets. La prop `ogImage` de `MainLayout` selecciona la imagen por página (default `/og/home.png`).
+- **Datos estructurados (JSON-LD):** builders en `src/lib/schema.ts`. La home emite `Organization`; cada página de app emite `MobileApplication`. Se pasan a `MainLayout` con la prop `structuredData`, que renderiza un `<script type="application/ld+json" is:inline>`.
+- **`robots.txt`** (en `public/`) permite el rastreo completo y apunta al `sitemap-index.xml`. La verificación de Google Search Console es una `<meta name="google-site-verification">` en `MainLayout`.
+
+---
+
 ## 10. i18n
 
 - **Idiomas soportados:** `en` (default), `es`, `ca`

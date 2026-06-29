@@ -1,8 +1,9 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Home from '../components/Home.astro';
+import { organizationSchema } from '../lib/schema';
 ---
 
-<MainLayout showBrand={false}>
+<MainLayout showBrand={false} structuredData={organizationSchema(Astro.site)}>
   <Home />
 </MainLayout>

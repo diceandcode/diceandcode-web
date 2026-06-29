@@ -10,17 +10,31 @@ interface Props {
   description?: string;
   alternates?: Record<string, string>;
   showBrand?: boolean;
+  ogImage?: string;
+  structuredData?: object;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const {
-  title = t('brandName'),
+  title,
   description = t('heroTagline'),
   alternates = { en: '/', es: '/es/', ca: '/ca/' },
   showBrand = true,
+  ogImage = '/og/home.png',
+  structuredData,
 } = Astro.props;
+
+const brandName = t('brandName');
+// Home (no title prop) → "Brand — descriptor"; interior pages → "Page — Brand".
+const fullTitle = title
+  ? `${title} — ${brandName}`
+  : `${brandName} — ${t('brandDescriptor')}`;
+
+const ogLocale = { en: 'en_US', es: 'es_ES', ca: 'ca_ES' }[lang];
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -67,7 +81,46 @@ const {
       href={new URL(alternates.en, Astro.site)}
     />
 
-    <SEO title={title} description={description} />
+    <SEO
+      title={fullTitle}
+      description={description}
+      canonical={canonical}
+      openGraph={{
+        basic: {
+          title: fullTitle,
+          type: 'website',
+          image: ogImageUrl,
+          url: canonical,
+        },
+        optional: {
+          description,
+          siteName: brandName,
+          locale: ogLocale,
+        },
+        image: {
+          alt: fullTitle,
+          width: 1200,
+          height: 630,
+        },
+      }}
+      twitter={{
+        card: 'summary_large_image',
+        title: fullTitle,
+        description,
+        image: ogImageUrl,
+        imageAlt: fullTitle,
+      }}
+    />
+
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
   </head>
   <body class="flex min-h-screen flex-col">
     <header
