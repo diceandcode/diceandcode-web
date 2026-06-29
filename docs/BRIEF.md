@@ -16,7 +16,7 @@ Web estática construida con Astro + Tailwind + Netlify.
 - i18n nativo de Astro
 - astro-icon (iconos SVG via Iconify; sets `@iconify-json/simple-icons` y `@iconify-json/mdi`)
 - astro-seo (meta tags y Open Graph)
-- @astrojs/sitemap (sitemap automático en cada build; requiere `site` en `astro.config.mjs`)
+- @astrojs/sitemap (sitemap automático en cada build; requiere `site` en `astro.config.mjs`; configurado con `i18n` para emitir alternates `hreflang` por idioma)
 
 URL de producción: `https://diceandcode.netlify.app`
 

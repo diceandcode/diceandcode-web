@@ -245,7 +245,7 @@ Layout para páginas de privacidad y términos (`/apps/[slug]/privacy`, `/apps/[
 - **JavaScript mínimo:** Astro genera HTML estático por defecto. No añadir JS en cliente salvo necesidad real (el selector de idioma se resuelve con `<details>` nativo, **sin JS**).
 - **Imágenes con `width`/`height`** explícitos o usando el componente `<Image>` de Astro para evitar layout shift (CLS).
 - `alt` descriptivo obligatorio en el logo y en capturas de apps.
-- **Sitemap** generado automáticamente por `@astrojs/sitemap` en cada build.
+- **Sitemap** generado automáticamente por `@astrojs/sitemap` en cada build, con alternates `hreflang` por idioma (opción `i18n`).
 
 ---
 

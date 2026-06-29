@@ -23,5 +23,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap(), icon()],
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', es: 'es', ca: 'ca' },
+      },
+    }),
+    icon(),
+  ],
 });
