@@ -9,13 +9,13 @@ const t = useTranslations(lang);
 // Fill these in when the store listings go live — null renders a disabled
 // "Coming soon" badge; a URL renders an active blue CTA.
 const appStoreUrl: string | null = null;
-const googlePlayUrl: string | null = null;
+const googlePlayUrl: string | null =
+  'https://play.google.com/store/apps/details?id=com.diceandcode.tapluck';
 
 const stores = [
   { url: appStoreUrl, label: 'App Store', icon: 'simple-icons:appstore' },
   { url: googlePlayUrl, label: 'Google Play', icon: 'simple-icons:googleplay' },
 ];
-const allLive = stores.every((store) => store.url);
 
 const modes = [
   { icon: 'mdi:gesture-tap', label: t('tapluckModePick') },
@@ -54,21 +54,21 @@ const termsHref = getRelativeLocaleUrl(lang, 'apps/tapluck/terms');
     {t('tapluckSubline')}
   </p>
 
-  <div class="flex flex-col items-center gap-3">
-    <div class="flex flex-col gap-2.5">
-      {
-        stores.map((store) =>
-          store.url ? (
-            <a
-              href={store.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex w-[200px] items-center justify-center gap-2 rounded-full bg-accent px-[26px] py-[11px] text-[15px] text-on-accent no-underline transition-colors duration-200 hover:bg-accent-hover"
-            >
-              <Icon name={store.icon} class="h-5 w-5" />
-              {store.label}
-            </a>
-          ) : (
+  <div class="flex flex-col gap-2.5">
+    {
+      stores.map((store) =>
+        store.url ? (
+          <a
+            href={store.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex w-[200px] items-center justify-center gap-2 rounded-full bg-accent px-[26px] py-[11px] text-[15px] text-on-accent no-underline transition-colors duration-200 hover:bg-accent-hover"
+          >
+            <Icon name={store.icon} class="h-5 w-5" />
+            {store.label}
+          </a>
+        ) : (
+          <div class="flex flex-col items-center gap-1">
             <span
               role="img"
               aria-label={`${store.label} — ${t('tapluckComingSoon')}`}
@@ -77,15 +77,11 @@ const termsHref = getRelativeLocaleUrl(lang, 'apps/tapluck/terms');
               <Icon name={store.icon} class="h-5 w-5" />
               {store.label}
             </span>
-          ),
-        )
-      }
-    </div>
-    {
-      !allLive && (
-        <span class="text-xs uppercase tracking-wide text-brand-muted">
-          {t('tapluckComingSoon')}
-        </span>
+            <span class="text-xs uppercase tracking-wide text-brand-muted">
+              {t('tapluckComingSoon')}
+            </span>
+          </div>
+        ),
       )
     }
   </div>
